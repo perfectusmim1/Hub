@@ -4,5 +4,9 @@ local Games = {
 if Games[game.PlaceId] then
     loadstring(game:HttpGet(Games[game.PlaceId]))()
 else
-print("Not supported")
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "PERFECTUS HUB", -- Required
+	Text = "Game not supported", -- Required
+	Icon = "rbxassetid://17009514249" -- Optional
+})
 end
