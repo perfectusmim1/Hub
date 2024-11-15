@@ -1,12 +1,40 @@
 local Games = {
-    [89438510123061] = "https://raw.githubusercontent.com/perfectusmim1/Games/refs/heads/main/animeshadow"
+    [89438510123061] = { 
+        Url = "https://raw.githubusercontent.com/perfectusmim1/Games/refs/heads/main/animeshadow", 
+        Name = "Anime Shadow" 
+    }
 }
+
+local deviceType = game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows and "💻 PC" or "📱 Mobile"
+local exe = identifyexecutor() or "Unknown Executor"
+
 if Games[game.PlaceId] then
-    loadstring(game:HttpGet(Games[game.PlaceId]))()
+    local gameData = Games[game.PlaceId]
+    local gameName = "Game Loading: " .. gameData.Name
+
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "PERFECTUS HUB",
+        Text = gameName,
+        Icon = "rbxassetid://17009514249"
+    })
+
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Device Info",
+        Text = "Device: " .. deviceType,
+        Icon = "rbxassetid://17009514249"
+    })
+
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Executor Info",
+        Text = "Executor: " .. exe,
+        Icon = "rbxassetid://17009514249"
+    })
+
+    loadstring(game:HttpGet(gameData.Url))()
 else
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "PERFECTUS HUB", -- Required
-	Text = "Game not supported", -- Required
-	Icon = "rbxassetid://17009514249" -- Optional
-})
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "PERFECTUS HUB",
+        Text = "Game not supported",
+        Icon = "rbxassetid://17009514249"
+    })
 end
